@@ -1,17 +1,25 @@
 import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url'; // Required for ES Modules to get the current directory
 
-const app = express()
-const port = 3000
+const app = express();
+const port = 3000;
 
-app.use(express.json())
+// Fix __dirname for ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-let teaData = []
-let nextId = 1
+app.use(express.json());
+
+// Serve static files (e.g., index.html)
+app.use(express.static(path.join(__dirname, 'public')));
+
+let teaData = [];
+let nextId = 1;
 
 app.get('/', (req, res) => {
-    res.status(200)
-    res.sendFile(path.join(__dirname, 'index.html'))
-})
+    res.status(200).sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 app.post('/teas', (req, res) => { // add new tea
     const {name, price} = req.body // destructuring on the go! classic js 101
