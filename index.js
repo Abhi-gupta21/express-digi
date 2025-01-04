@@ -8,6 +8,11 @@ app.use(express.json())
 let teaData = []
 let nextId = 1
 
+app.get('/', (req, res) => {
+    res.status(200)
+    res.send(index.html)
+})
+
 app.post('/teas', (req, res) => { // add new tea
     const {name, price} = req.body // destructuring on the go! classic js 101
     const newTea = {
