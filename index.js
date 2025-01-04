@@ -10,7 +10,7 @@ let nextId = 1
 
 app.get('/', (req, res) => {
     res.status(200)
-    res.sendFile(index.html)
+    res.sendFile(path.join(__dirname, 'index.html'))
 })
 
 app.post('/teas', (req, res) => { // add new tea
